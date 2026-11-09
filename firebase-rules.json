@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
+    },
+    "messages": {
+      "$chatId": {
+        ".read": "auth != null && ($chatId.contains(auth.uid))",
+        ".write": "auth != null && ($chatId.contains(auth.uid))"
+      }
+    },
+    "conversations": {
+      ".read": "auth != null",
+      "$chatId": {
+        ".write": "auth != null && ($chatId.contains(auth.uid))"
+      }
+    }
+  }
+}
